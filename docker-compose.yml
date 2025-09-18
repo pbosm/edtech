@@ -36,12 +36,14 @@ services:
   frontend:
     build:
       context: ./frontend
+      dockerfile: Dockerfile
     container_name: edtech-frontend
+    working_dir: /app
     volumes:
       - ./frontend:/app
     expose:
       - "3000"
-    command: ["bash", "-lc", "./start.sh"]
+    command: ["sh", "-lc", "./start.sh"]
 
   nginx:
     image: nginx:alpine

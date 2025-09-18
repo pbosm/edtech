@@ -1,18 +1,15 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 set -e
 cd /app
 
+dos2unix frontend/start.sh 2>/dev/null || true
+chmod +x frontend/start.sh
+
 # 1) .env
-if [ ! -f .env ]; then
-  echo "[frontend] .env não encontrado, copiando de .env.example..."
-  cp .env.example .env
-fi
+[ -f .env ] || { echo "[frontend] copiando .env.example -> .env"; cp .env.example .env; }
 
 # 2) deps
-if [ ! -d node_modules ]; then
-  echo "[frontend] node_modules ausente, instalando..."
-  npm install
-fi
+[ -d node_modules ] || { echo "[frontend] instalando deps..."; npm install; }
 
 echo "[frontend] iniciando Nuxt..."
 exec npm run dev -- --port 3000 --host
