@@ -32,6 +32,13 @@ services:
     expose:
       - "8000"
     command: ["/usr/local/bin/start.sh"]
+    environment:
+      DB_CONNECTION: mysql
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_DATABASE: edtech
+      DB_USERNAME: edtechuser
+      DB_PASSWORD: edteachuser123
 
   frontend:
     build:
