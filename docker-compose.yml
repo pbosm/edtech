@@ -41,7 +41,7 @@ services:
       - ./frontend:/app
     expose:
       - "3000"
-    command: ["bash", "-lc", "/app/start.sh"]
+    command: ["bash", "-lc", "./start.sh"]
 
   nginx:
     image: nginx:alpine
