@@ -27,8 +27,6 @@ services:
     container_name: edtech-backend
     depends_on:
       - mysql
-    env_file:
-      - ./backend/.env
     volumes:
       - ./backend:/var/www/html
     expose:
@@ -39,8 +37,6 @@ services:
     build:
       context: ./frontend
     container_name: edtech-frontend
-    env_file:
-      - ./frontend/.env
     volumes:
       - ./frontend:/app
     expose:
