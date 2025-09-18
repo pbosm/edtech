@@ -33,13 +33,7 @@ services:
       - ./backend:/var/www/html
     expose:
       - "8000"
-    command: >
-      sh -lc "if [ ! -f artisan ]; then
-        echo 'Laravel não encontrado.';
-        tail -f /dev/null;
-      else
-        php artisan serve --host=0.0.0.0 --port=8000;
-      fi"
+    command: ["/usr/local/bin/start.sh"]
 
   frontend:
     build:
