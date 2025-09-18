@@ -45,7 +45,7 @@ services:
       - ./frontend:/app
     expose:
       - "3000"
-    command: sh -lc "npm install && npm run dev -- --port 3000 --host"
+   command: ["bash", "-lc", "/app/start.sh"]
 
   nginx:
     image: nginx:alpine
