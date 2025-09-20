@@ -21,5 +21,8 @@ if ! grep -q '^APP_KEY=' .env || [ -z "$(grep '^APP_KEY=' .env | cut -d= -f2)" ]
   php artisan key:generate --force || true
 fi
 
+# 4) Migrate + Seed
+php artisan migrate --seed --force
+
 echo "[backend] iniciando Laravel..."
 exec php artisan serve --host=0.0.0.0 --port=8000
