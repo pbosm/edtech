@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->name('v1.')->group(function () {
     // Courses
+    Route::get('courses/dashboard', [CourseController::class, 'dashboard'])->name('courses.dashboard');
+
     Route::get('courses', [CourseController::class, 'index'])->name('courses.index');
     Route::get('courses/{id}', [CourseController::class, 'show'])->name('courses.show');
     Route::get('courses/{id}/students', [CourseController::class, 'students'])->name('courses.students');

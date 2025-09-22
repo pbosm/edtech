@@ -4,23 +4,59 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CourseRequest;
-use App\Http\Requests\CourseUpdateRequest;
 use App\Http\Resources\CourseResource;
 use App\Http\Resources\StudentResource;
 use App\Models\Course;
+use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CourseController extends Controller
 {
+    public function dashboard()
+    {
+        $top = Course::query()
+            ->withCount('students')
+            ->orderByDesc('students_count')
+            ->take(10)
+            ->get(['id','name','duration_hours']);
+
+        return response()->json([
+            'totals' => [
+                'courses'            => Course::count(),
+                'students'           => Student::count(),
+                'avg_duration_hours' => round((float) Course::avg('duration_hours'), 2),
+            ],
+            'chart' => [
+                'labels' => $top->pluck('name')->map(fn($n) => Str::limit($n ?? '—', 40))->values(),
+                'values' => $top->pluck('students_count')->map(fn($n) => (int) $n)->values(),
+            ],
+            'top_courses' => $top->map(fn($c) => [
+                'id'             => $c->id,
+                'name'           => $c->name,
+                'duration_hours' => $c->duration_hours,
+                'students_count' => (int) $c->students_count,
+            ]),
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        $courses = Course::query()
+        $query = Course::query()
             ->withCount('students')
-            ->orderByDesc('id')
-            ->paginate($request->integer('per_page', 10));
+            ->orderByDesc('id');
+
+        if ($search = trim((string) $request->query('filterMsg', ''))) {
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'LIKE', "%{$search}%")
+                    ->orWhere('description', 'LIKE', "%{$search}%");
+            });
+        }
+
+        $courses = $query->paginate($request->integer('per_page', 10));
 
         return CourseResource::collectionComplete($courses, false);
     }
@@ -43,13 +79,15 @@ class CourseController extends Controller
      */
     public function show(int $id)
     {
-        $course = Course::withCount('students')->find($id);
+        $course = Course::with([
+            'students' => fn ($query) => $query->orderBy('students.id', 'desc'),
+        ])->withCount('students')->find($id);
 
         if (!$course) {
             return response()->json(['message' => 'Curso não encontrado.'], 404);
         }
 
-        return (new CourseResource($course))->complete(false);
+        return (new CourseResource($course))->complete(true);
     }
 
     /**

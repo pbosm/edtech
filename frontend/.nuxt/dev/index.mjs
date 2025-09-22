@@ -648,7 +648,7 @@ const _inlineRuntimeConfig = {
     }
   },
   "public": {
-    "apiBase": "/api"
+    "apiBase": "/api/v1"
   }
 };
 const envOptions = {
@@ -1010,7 +1010,7 @@ async function errorHandler(error, event) {
 
 const rootDir = "/app";
 
-const appHead = {"meta":[{"name":"viewport","content":"width=device-width, initial-scale=1"},{"charset":"utf-8"}],"link":[],"style":[],"script":[],"noscript":[]};
+const appHead = {"meta":[{"name":"viewport","content":"width=device-width, initial-scale=1"},{"charset":"utf-8"}],"link":[],"style":[],"script":[],"noscript":[],"title":"EdTech"};
 
 const appRootTag = "div";
 

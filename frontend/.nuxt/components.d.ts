@@ -14,6 +14,15 @@ type HydrationStrategies = {
 type LazyComponent<T> = (T & DefineComponent<HydrationStrategies, {}, {}, {}, {}, {}, {}, { hydrated: () => void }>)
 
 
+export const LayoutPublicFooter: typeof import("../components/layout/PublicFooter.vue")['default']
+export const LayoutPublicHeader: typeof import("../components/layout/PublicHeader.vue")['default']
+export const LayoutPublicSiderBard: typeof import("../components/layout/PublicSiderBard.vue")['default']
+export const UiAppChart: typeof import("../components/ui/AppChart.vue")['default']
+export const UiAppConfirmModal: typeof import("../components/ui/AppConfirmModal.vue")['default']
+export const UiAppPagination: typeof import("../components/ui/AppPagination.vue")['default']
+export const UiAppSpinner: typeof import("../components/ui/AppSpinner.vue")['default']
+export const UiAppTable: typeof import("../components/ui/AppTable.vue")['default']
+export const UiAppToast: typeof import("../components/ui/AppToast.vue")['default']
 export const NuxtWelcome: typeof import("../node_modules/nuxt/dist/app/components/welcome.vue")['default']
 export const NuxtLayout: typeof import("../node_modules/nuxt/dist/app/components/nuxt-layout")['default']
 export const NuxtErrorBoundary: typeof import("../node_modules/nuxt/dist/app/components/nuxt-error-boundary.vue")['default']
@@ -38,6 +47,15 @@ export const Html: typeof import("../node_modules/nuxt/dist/head/runtime/compone
 export const Body: typeof import("../node_modules/nuxt/dist/head/runtime/components")['Body']
 export const NuxtIsland: typeof import("../node_modules/nuxt/dist/app/components/nuxt-island")['default']
 export const NuxtRouteAnnouncer: typeof import("../node_modules/nuxt/dist/app/components/server-placeholder")['default']
+export const LazyLayoutPublicFooter: LazyComponent<typeof import("../components/layout/PublicFooter.vue")['default']>
+export const LazyLayoutPublicHeader: LazyComponent<typeof import("../components/layout/PublicHeader.vue")['default']>
+export const LazyLayoutPublicSiderBard: LazyComponent<typeof import("../components/layout/PublicSiderBard.vue")['default']>
+export const LazyUiAppChart: LazyComponent<typeof import("../components/ui/AppChart.vue")['default']>
+export const LazyUiAppConfirmModal: LazyComponent<typeof import("../components/ui/AppConfirmModal.vue")['default']>
+export const LazyUiAppPagination: LazyComponent<typeof import("../components/ui/AppPagination.vue")['default']>
+export const LazyUiAppSpinner: LazyComponent<typeof import("../components/ui/AppSpinner.vue")['default']>
+export const LazyUiAppTable: LazyComponent<typeof import("../components/ui/AppTable.vue")['default']>
+export const LazyUiAppToast: LazyComponent<typeof import("../components/ui/AppToast.vue")['default']>
 export const LazyNuxtWelcome: LazyComponent<typeof import("../node_modules/nuxt/dist/app/components/welcome.vue")['default']>
 export const LazyNuxtLayout: LazyComponent<typeof import("../node_modules/nuxt/dist/app/components/nuxt-layout")['default']>
 export const LazyNuxtErrorBoundary: LazyComponent<typeof import("../node_modules/nuxt/dist/app/components/nuxt-error-boundary.vue")['default']>

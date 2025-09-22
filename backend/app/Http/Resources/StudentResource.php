@@ -22,6 +22,7 @@ class StudentResource extends JsonResource
             'name'          => $this->name,
             'email'         => $this->email,
             'cpf'           => $this->cpf,
+            'created_at'    => $this->brDate($this->created_at),
             'courses_count' => $this->whenCounted('courses'),
         ];
     }

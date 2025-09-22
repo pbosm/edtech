@@ -15,11 +15,22 @@ class StudentController extends Controller
      */
     public function index(Request $request)
     {
-        $perPage = $request->integer('per_page', 10);
+        $perPage   = $request->integer('per_page', 10);
+        $filterMsg = trim((string) $request->query('filterMsg', ''));
 
-        $students = Student::with('courses')
-            ->orderByDesc('id')
-            ->paginate($perPage);
+        $query = Student::query()
+            ->with('courses')
+            ->orderByDesc('id');
+
+        if (!empty($filterMsg) || $filterMsg !== '') {
+            $query->where(function ($sub) use ($filterMsg) {
+                $sub->where('name',  'LIKE', "%{$filterMsg}%")
+                    ->orWhere('email','LIKE', "%{$filterMsg}%")
+                    ->orWhere('cpf',   'LIKE', "%{$filterMsg}%");
+            });
+        }
+
+        $students = $query->paginate($perPage);
 
         return StudentResource::collection($students);
     }

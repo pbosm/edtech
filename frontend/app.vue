@@ -1,10 +1,10 @@
 <template>
-  <div class="p-6">
-    <nav class="mb-4 space-x-4">
-      <NuxtLink to="/">Home</NuxtLink>
-      <NuxtLink to="/courses">Cursos</NuxtLink>
-      <NuxtLink to="/students">Alunos</NuxtLink>
-    </nav>
+  <NuxtLayout>
     <NuxtPage />
-  </div>
+    <AppConfirmHost />
+  </NuxtLayout>
 </template>
+
+<script setup lang="ts">
+  import AppConfirmHost from './components/ui/AppConfirmModal.vue'
+</script>

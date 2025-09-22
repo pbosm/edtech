@@ -26,7 +26,8 @@ services:
       dockerfile: Dockerfile
     container_name: edtech-backend
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
     volumes:
       - ./backend:/var/www/html
     expose:
@@ -46,6 +47,9 @@ services:
       dockerfile: Dockerfile
     container_name: edtech-frontend
     working_dir: /app
+    environment:
+      NODE_ENV: development
+      NPM_CONFIG_PRODUCTION: "false"
     volumes:
       - ./frontend:/app
     expose:

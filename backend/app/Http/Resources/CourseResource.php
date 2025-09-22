@@ -23,13 +23,13 @@ class CourseResource extends JsonResource
             'name' => $this->name,
             'description'    => $this->description,
             'duration_hours' => $this->duration_hours,
+            'created_at'     => $this->brDate($this->created_at),
+            'students_count' => $this->whenCounted('students'),
         ];
 
         if ($this->complete) {
             $data += [
-                'students_count' => $this->whenCounted('students'),
                 'students'       => StudentResource::collection($this->whenLoaded('students')),
-                'created_at'     => $this->brDate($this->created_at),
                 'updated_at'     => $this->brDate($this->updated_at),
             ];
         }
