@@ -31,7 +31,7 @@ docker logs -f edtech-backend
 GET    /courses/dashboard
 
 # Courses
-GET    /courses                 # ?page=1&per_page=10&q=texto
+GET    /courses                 # ?page=1&per_page=10&filterMsg=texto
 GET    /courses/{id}
 GET    /courses/{id}/students   # ?page=1&per_page=10
 POST   /courses                 # { name, description?, duration_hours }
